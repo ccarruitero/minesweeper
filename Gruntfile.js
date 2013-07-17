@@ -53,11 +53,6 @@ module.exports = function(grunt) {
     }
   });
   
-  grunt.registerTask('open-browser', function() {
-    var open = require('open');
-    open('http://' + hostname + ':' + port);
-  });
-  
   grunt.loadTasks('tasks');
   grunt.loadNpmTasks('thorax-inspector');
   grunt.loadNpmTasks('lumbar');
@@ -67,7 +62,6 @@ module.exports = function(grunt) {
     'thorax:inspector',
     'lumbar:init',
     'connect:server',
-    'open-browser',
     'lumbar:watch'
   ]);
 };
