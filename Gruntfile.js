@@ -47,6 +47,16 @@ module.exports = function(grunt) {
 
     build_test_runner: {
       all: ['test/**/*_test.js']
+    },
+
+    watch: {
+      scripts: {
+        files: ['Gruntfile.js', 'js/!(lib)/*.js', 'test/!(support)/*.js'],
+        tasks: ['jshint', 'mocha'],
+        options: {
+          interrupt: true
+        }
+      }
     }
   });
   
@@ -55,6 +65,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-connect');
   grunt.loadNpmTasks('grunt-mocha');
   grunt.loadNpmTasks('grunt-contrib-jshint');
+  grunt.loadNpmTasks('grunt-contrib-watch');
 
   grunt.registerMultiTask('build_test_runner', 'Creates a test runner file.', function(){
     var tmpl = grunt.file.read('test/support/runner.html.tmpl');
@@ -68,7 +79,7 @@ module.exports = function(grunt) {
     grunt.file.write('test/runner.html', grunt.template.process(tmpl, renderingContext));
   });
 
-  grunt.registerTask('test', ['jshint', 'build_test_runner', 'mocha']);
+  grunt.registerTask('test', ['jshint', 'build_test_runner', 'mocha', 'watch']);
   grunt.registerTask('default', [
     'lumbar:init',
     'connect:server',
