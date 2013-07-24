@@ -3,3 +3,4 @@ node_modules
 public/modules
 *.swp
 components/
+test/runner.html
