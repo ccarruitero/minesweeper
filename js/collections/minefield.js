@@ -1,13 +1,14 @@
 Application.Collection.extend({
   name: "minefield",
-  model: Application.Models["square"],
-  addSquares: function(){
+  model: Application.Models.square,
+  defaults: {
+    x : 10,
+    y : 5
+  },
+  addSquares: function(size){
     var that = this;
-    var x = 10;
-    var y = 5;
-    var size = this.getSize(x, y);
     for (var i=0; i<size; i++){
-        var square = new Application.Models["square"];
+        var square = new Application.Models.square();
         that.add(square);
     }
   },
@@ -19,21 +20,22 @@ Application.Collection.extend({
     this.addMines();
   },
   getRandom: function(min, max){
-    return Math.floor(Math.random() * (max - min + 1)) + min
+    return Math.floor(Math.random() * (max - min + 1)) + min;
   },
-  addMines: function(){
-    var mines = 10;
+  addMines: function(mines){
     var that = this;
     var min = 1;
     var max = this.length;
     for (var i=0; i<mines; i++){
-        var square = that.get('c' + this.getRandom(min, max));
-        if(!square.get('hasMine')){
-            square.set({'hasMine': true});
-        }
+      var squares = that.where({'hasMine': false});
+      var square = squares[that.getRandom(min, max)];
+      that.setMine(square);
     }
+  },
+  setMine: function(square){
+    square.set({'hasMine': true});
   }
 });
 
 // Instances of this collection can be created by calling:
-new Application.Collections["minefield"]()
+new Application.Collections.minefield();
