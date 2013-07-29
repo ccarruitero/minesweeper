@@ -1,1 +1,16 @@
 /* This stylesheet will be available on all modules */
+
+#minefield {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.square {
+  display: block;
+  width: 35px;
+  height: 35px;
+  border: solid 0.1px #000;
+  float: left;
+  background: grey;
+  cursor: pointer;
+}

@@ -24,7 +24,9 @@
         },
         "js/lib/bootstrap.js",
         "js/models/square.js",
-        "js/collections/minefield.js"
+        "js/collections/minefield.js",
+        "js/views/minefield.js",
+        "js/views/square.js"
       ],
       "styles": [
         "stylesheets/base.css",

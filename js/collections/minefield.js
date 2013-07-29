@@ -3,7 +3,7 @@ Application.Collection.extend({
   model: Application.Models.square,
   defaults: {
     x : 10,
-    y : 5
+    y : 8
   },
   addSquares: function(size){
     var that = this;
@@ -16,7 +16,7 @@ Application.Collection.extend({
     return x * y;
   },
   initialize: function(){
-    this.addSquares();
+    this.addSquares(this.getSize(this.defaults.x, this.defaults.y));
     this.addMines();
   },
   getRandom: function(min, max){
@@ -38,4 +38,4 @@ Application.Collection.extend({
 });
 
 // Instances of this collection can be created by calling:
-new Application.Collections.minefield();
+// new Application.Collections.minefield();
