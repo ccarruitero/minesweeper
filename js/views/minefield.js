@@ -15,10 +15,7 @@ Application.View.extend({
   template: 'minefield.handlebars',
   newGame: function(){
     this.squares.newGame();
-    //$(this.el).delegate('li', 'click', this.reveal);
-    //console.log(this.events); //({'click li', 'reveal'});
     this.on('click li', this.reveal);
-    console.log('new game');
   },
   reveal: function(event){
     var square = $(event.target).model();
@@ -26,7 +23,6 @@ Application.View.extend({
     if (square.get('hasMine') === true) {
       this.revealMines();
       this.blockMinefield();
-      console.log('game over');
     }
   },
   revealMines: function(){
@@ -34,8 +30,6 @@ Application.View.extend({
   },
   blockMinefield: function(){
     $(this.el).undelegate('li', 'click');
-    //this.off('click li');
-    console.log('off click');
   }
 });
 
