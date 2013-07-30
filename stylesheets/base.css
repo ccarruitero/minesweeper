@@ -7,10 +7,32 @@
 
 .square {
   display: block;
-  width: 35px;
-  height: 35px;
+  width: 30px;
+  height: 30px;
   border: solid 0.1px #000;
   float: left;
-  background: grey;
+  background: #b8b8b8;
   cursor: pointer;
+}
+
+.mine {
+  width: 100%;
+  height: 100%;
+  background: url(../img/mine.png) no-repeat;
+  background-size: 100%;
+  position: relative;
+  z-index: -1;
+}
+
+.pressed {
+  background: #606060;
+}
+
+.pressed-mine {
+  background: red;
+}
+
+.show {
+  z-index: 3;
+  position: static;
 }
