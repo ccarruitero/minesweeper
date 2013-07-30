@@ -1,8 +1,15 @@
 some content
-<ul id="minefield">
-{{#collection squares}}
-  <li class="square"></li>
+<button id="new">new game</button>
+<div id="minefield">
+{{#collection squares tag='ul'}}
+  <li class="square
+    {{#pressed}}
+    {{#mineActive}}pressed-mine{{/mineActive}}
+    pressed
+    {{/pressed}}">
+    <p {{#hasMine}} class="mine" {{/hasMine}}></p>
+  </li>
 {{else}}
   No squares
 {{/collection}}
-</ul>
+</div>
