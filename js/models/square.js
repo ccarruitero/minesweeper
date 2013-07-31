@@ -3,11 +3,8 @@ Application.Model.extend({
   defaults: {
     hasMine: false,
     pressed: false,
-    mineActivate: false
-  },
-  deactivateMine: function(){
-    this.set({'mineActive': false});
-  } 
+    mineDeactived: false
+  }
 });
 
 // Instances of this model can be created by calling:

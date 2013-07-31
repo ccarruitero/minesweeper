@@ -24,6 +24,11 @@
   z-index: -1;
 }
 
+.flag {
+  background: url(../img/flag.png) no-repeat;
+  background-size: 100%;
+}
+
 .pressed {
   background: #606060;
 }

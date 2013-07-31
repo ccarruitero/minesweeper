@@ -1,13 +1,8 @@
-some content
 <button id="new">new game</button>
 <div id="minefield">
 {{#collection squares tag='ul'}}
-  <li class="square
-    {{#pressed}}
-    {{#mineActive}}pressed-mine{{/mineActive}}
-    pressed
-    {{/pressed}}">
-    <p {{#hasMine}} class="mine" {{/hasMine}}></p>
+  <li class="square {{#pressed}} pressed {{#hasMine}}pressed-mine{{/hasMine}}{{/pressed}}">
+    <p {{#hasMine}} class="mine {{#mineDeactived}} flag {{/mineDeactived}}" {{/hasMine}}></p>
   </li>
 {{else}}
   No squares
