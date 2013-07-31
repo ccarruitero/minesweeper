@@ -3,7 +3,8 @@ Application.Collection.extend({
   model: Application.Models.square,
   defaults: {
     x : 10,
-    y : 8
+    y : 8,
+    mines: 10
   },
   addSquares: function(size){
     var that = this;
@@ -15,9 +16,18 @@ Application.Collection.extend({
   getSize: function(x, y){ 
     return x * y;
   },
-  initialize: function(){
+  initialize: function(x, y, mines){
+    if (x){
+      this.defaults.x = x;
+    }
+    if (y) {
+      this.defaults.y = y;
+    }
+    if (mines){
+      this.defaults.mines = mines;
+    }
     this.addSquares(this.getSize(this.defaults.x, this.defaults.y));
-    this.addMines(10);
+    this.addMines(this.defaults.mines);
   },
   getRandom: function(min, max){
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -37,7 +47,9 @@ Application.Collection.extend({
   },
   newGame: function(){
     this.reset();
-    this.initialize();
+    this.initialize(this.defaults.x, this.defaults.y, this.defaults.mines);
+  },
+  neightbords: function(){
   },
   gameOver: function(){
   }
