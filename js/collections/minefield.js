@@ -6,11 +6,15 @@ Application.Collection.extend({
     y : 8,
     mines: 10
   },
-  addSquares: function(size){
+  addSquares: function(x ,y){
     var that = this;
-    for (var i=0; i<size; i++){
+    
+    for (var i=0; i<x; i++){
+      for (var j=0; j< y; j++){
         var square = new Application.Models.square();
+        square.set({'positionX': i, 'positionY': j});
         that.add(square);
+      }
     }
   },
   getSize: function(x, y){ 
@@ -26,7 +30,7 @@ Application.Collection.extend({
     if (mines){
       this.defaults.mines = mines;
     }
-    this.addSquares(this.getSize(this.defaults.x, this.defaults.y));
+    this.addSquares(this.defaults.x, this.defaults.y);
     this.addMines(this.defaults.mines);
   },
   getRandom: function(min, max){
@@ -49,7 +53,23 @@ Application.Collection.extend({
     this.reset();
     this.initialize(this.defaults.x, this.defaults.y, this.defaults.mines);
   },
-  neightbords: function(){
+  neighborsHasMine: function(square){
+    var that = this;
+    var posX = square.get('positionX');
+    var posY = square.get('positionY');
+    var nearMines = 0;
+    var coordinates = [[0,-1], [0,1],[-1, 0], [0,1]];
+    $.map(coordinates, function(coordinate){
+      var positionX = coordinate[0] + posX;
+      var positionY = coordinate[1] + posY;
+      var neighborSquare = that.where({'positionX': positionX,
+                                       'positionY': positionY});
+      if ((neighborSquare.length != 0) &&
+         (neighborSquare[0].get('hasMine') === true)){
+        nearMines += 1
+      }
+    });
+    return nearMines
   },
   gameOver: function(){
   }

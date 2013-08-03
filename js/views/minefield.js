@@ -3,19 +3,28 @@ Application.View.extend({
   events: {
     'click li': 'reveal',
     'dblclick li': 'flag',
-    'click #new': 'newGame'
+    'click #new': 'newGame',
+    'touchStart li': 'reveal'
   },
   lastClick: false,
+  colors: ["#000000", "#3333cc", "#006600", "#cc0000", "#660066", "#006666",
+           "#000000", "#000000", "#000000"],
   squares: new Application.Collections.minefield(), 
   template: 'minefield.handlebars',
   newGame: function(){
     this.squares.newGame();
     this.on('click li', this.reveal);
   },
+  randomColor: function(){
+    var random = this.squares.getRandom(0, colors.length);
+    return this.colors[random]
+  },
   reveal: function(event){
     var that = this;
     var alreadyClickedTimeout;
-    var square = $(event.target).model();
+    var elem = $(event.target);
+    var square = elem.model();
+    var neighborsMines = that.squares.neighborsHasMine(square);
     if (this.lastClick === true){
       this.lastClick = false;
       clearTimeout(alreadyClickedTimeout);
@@ -32,6 +41,9 @@ Application.View.extend({
             that.blockMinefield();
             console.log('single click');
           }
+        } else if( neighborsMines > 0){
+          elem.children().append(document.createTextNode(neighborsMines));
+          //$('p').append(document.createTextNode(neighborsMines));
         }
       }, 200);
     }
@@ -42,7 +54,7 @@ Application.View.extend({
   blockMinefield: function(){
     $(this.el).undelegate('li', 'click');
   },
-  countMines: function(){
+  countActiveMines: function(){
     var minesActive =this.where({'mineDeactivated': false}).length;
   },
   deactivateMine: function(square){
@@ -50,7 +62,7 @@ Application.View.extend({
     console.log('mine deactivated');
   },
   flag: function(event){
-    var elem = $(event.target)
+    var elem = $(event.target);
     var square = elem.model();
     if (square.get('hasMine') === true){
       this.deactivateMine(square);
