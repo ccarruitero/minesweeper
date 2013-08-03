@@ -58,7 +58,8 @@ Application.Collection.extend({
     var posX = square.get('positionX');
     var posY = square.get('positionY');
     var nearMines = 0;
-    var coordinates = [[0,-1], [0,1],[-1, 0], [0,1]];
+    var coordinates = [[0,-1], [0,1],[-1, 0], [1,0], [-1,-1],
+                       [1,1], [-1 ,1], [1,-1]];
     $.map(coordinates, function(coordinate){
       var positionX = coordinate[0] + posX;
       var positionY = coordinate[1] + posY;
