@@ -1,4 +1,23 @@
 /* This stylesheet will be available on all modules */
+body {
+  width: 320px;
+  margin: 0 auto;
+}
+
+#new {
+  margin: 15px 10px;
+  border: none;
+  background: #fafafa;
+  box-shadow: 0px 0px 3px #000;
+  border-radius: 10px;
+  padding: 5px;
+}
+
+#new:hover, #new:active {
+  box-shadow: inset 1px 1px 2px #130f30;
+  background: rgba(0,0,30,0.5);
+  color: #fafafa;
+}
 
 #minefield {
   width: 300px;
@@ -22,6 +41,7 @@
   background-size: 100%;
   position: relative;
   z-index: -1;
+  box-shadow: none;
 }
 
 .flag {
@@ -31,6 +51,7 @@
 
 .pressed {
   background: #606060;
+  box-shadow: inset 2px 2px 2px #130f30;
 }
 
 .pressed-mine {
@@ -40,4 +61,15 @@
 .show {
   z-index: 3;
   position: static;
+}
+
+.neighbord {
+  background: #bdc1c7;
+  box-shadow: none;
+}
+
+.neighbord p {
+  padding: 5px;
+  font-size: 25px;
+  margin: 0 3px;
 }

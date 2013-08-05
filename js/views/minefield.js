@@ -16,13 +16,14 @@ Application.View.extend({
     this.on('click li', this.reveal);
   },
   randomColor: function(){
-    var random = this.squares.getRandom(0, colors.length);
+    var random = _.random(0, this.colors.length);
     return this.colors[random]
   },
   reveal: function(event){
+    event.preventDefault();
     var that = this;
     var alreadyClickedTimeout;
-    var elem = $(event.target);
+    var elem = $(event.currentTarget);
     var square = elem.model();
     var neighborsMines = that.squares.neighborsHasMine(square);
     if (this.lastClick === true){
@@ -43,6 +44,9 @@ Application.View.extend({
           }
         } else if( neighborsMines > 0){
           elem.children().append(document.createTextNode(neighborsMines));
+          elem.children().css('color', that.randomColor());
+          elem.addClass('neighbord');
+          console.log('exists ' + neighborsMines + ' mine(s) around');
           //$('p').append(document.createTextNode(neighborsMines));
         }
       }, 200);
@@ -62,7 +66,8 @@ Application.View.extend({
     console.log('mine deactivated');
   },
   flag: function(event){
-    var elem = $(event.target);
+    event.preventDefault();
+    var elem = $(event.currentTarget);
     var square = elem.model();
     if (square.get('hasMine') === true){
       this.deactivateMine(square);

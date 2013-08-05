@@ -40,7 +40,7 @@ Application.Collection.extend({
     var that = this;
     for (var i=0; i<mines; i++){
       var squares = that.where({'hasMine': false});
-      var random = that.getRandom(0, (squares.length -1));
+      var random = _.random(0, (squares.length -1));
       var square = squares[random];
       that.setMine(square);
     }
